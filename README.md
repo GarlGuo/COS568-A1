@@ -31,7 +31,7 @@ pip install -r requirements.txt
 ## How to Run 
 Run `python main.py --help` for a complete description of flags and hyperparameters. You can also go to `main.py` to check all the parameters. 
 
-Example: Initialize a ResNet20, prune with SynFlow and train it to the sparsity of 10^-0.5 . We have sparsity = 10**(-float(args.compression)).
+Example: Initialize a ResNet20, prune with SynFlow and train it to the sparsity of $10^{-0.5}$ . We have sparsity = 10**(-float(args.compression)).
 ```
 python main.py --model-class lottery --model resnet20 --dataset cifar10 --experiment singleshot --pruner synflow --compression 0.5
 ```
@@ -106,7 +106,10 @@ Download the trace file after running 1 iteration of inference step on testing d
 python main.py --model-class lottery --model resnet20 --dataset cifar10 --experiment singleshot --pruner snip  --compression 1.0 --save-trace
 ```
 
-1. Load the trace to Chrome browser, and take a screenshot. Report the GPU hardware details via `nvidia-smi` on terminal. 
+1. Load the trace to Chrome browser (open ```chrome://tracing``` on Chrome, and download the `trace.json` and click on the load button), and take a screenshot. Report the GPU hardware details via `nvidia-smi` on terminal. 
+
+- We expect at least 2 streams/rows appear: a python cpu stream and at least 1 CUDA stream to appear in the tracing result. However, tracing might fail to capture CUDA stream for some recent GPUs or PyTorch versions. In this case, we could use an older PyTorch version (e.g. 2.5.1) or older GPU version (Ampere or Hopper generation, or consumer-graded GPUs such as RTX 3090 or RTX 4090).
+
 2. From the trace, **calculate the total CUDA time spent on all convolution layers for a single step.** You may find there are a lot of "bubbles" on the CUDA stream and there might be multiple launched CUDA streams. **We should disregard most of large bubbles and sum up the CUDA convolution kernel time for all CUDA stream**. Please be wise on the  Calculate the percentage of convolution CUDA kernel time over the total time spent for this inference step.
 
 Hint: please refer to this screenshot to see an example of convolution CUDA kernel time for 1 layer. We have 3 launched CUDA streams by `aten::con2d` (PyTorch native convolution call on the CPU host), and the kernels boxed in blue are the corresponding CUDA kernels.
