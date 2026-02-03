@@ -119,7 +119,7 @@ python main.py --model-class lottery --model resnet20 --dataset cifar10 --experi
 
 2. From the trace, **calculate the total CUDA time spent on all convolution layers for a single step.** You may find there are a lot of "bubbles" on the CUDA stream and there might be multiple launched CUDA streams. **We should disregard large bubble time and only sum up the actual CUDA convolution kernel time**. If there are multiple CUDA stream executed on parallel, we treat the total time as the time where at least 1 CUDA kernel is running. Calculate the percentage of convolution CUDA kernel time over the total time spent for this inference step.
 
-- Hint: this is an example of convolution CUDA kernel time for 1 layer. We have 3 launched CUDA streams by `aten::con2d` (PyTorch native convolution call on the CPU host), and the kernels boxed in blue are the corresponding CUDA kernels.
+- Hint: this is an example of convolution CUDA kernel time for 1 layer. We have 3 launched CUDA streams by `aten::conv2d` (PyTorch native convolution call on the CPU host), and the kernels boxed in blue are the corresponding CUDA kernels.
 ![Example convolution kernel runtime for 1 layer](Results/Plots/cudnn-convolution-kernel-example.png)
 
 - For convenience, we can take the interval of multiple kernels as their total time **if the gap/bubbles between these kernels are *small***. The following screenshot shows an example of 113 us time interval as the total time of multiple convolution-related kernels. **Use your judgment to decide whether the gaps are small enough to ignore.**
