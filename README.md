@@ -126,7 +126,7 @@ python main.py --model-class lottery --model resnet20 --dataset cifar10 --experi
 ![Example on calculating time](Results/Plots/cudnn-convolution-kernel-time.png)
 
 
-3. (open-ended question) Analyze the major source of time spent during inference, and propose 2 solutions that may accelerate the inference. For this question, we don't need to implement such solutions and a written analysis suffice. 
+3. (open-ended question) Analyze the major source of time spent during inference, and propose at least 1 solution that may accelerate the inference. For this question, we don't need to implement such solution(s) and simply describing the solution on the final report is sufficient. 
 
 
 ### 3. The compression ratio 
