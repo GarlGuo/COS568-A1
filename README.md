@@ -130,8 +130,8 @@ python main.py --model-class lottery --model resnet20 --dataset cifar10 --experi
 
 
 ### 3. The compression ratio 
-Report the **sparsity of the weight of convolution layer of block 0** and draw the corresponding **weight histograms** using pruner SNIP with the the settings
-`model = resnet20`, `dataset=cifar10`, `compression = 0.5`
+Report the **sparsity of the weight of *all* convolution layer(s) of block 0** and draw the corresponding **weight histograms** using pruner SNIP with the the settings
+`model = resnet20`, `dataset=cifar10`, `compression = 0.5`. If there is more than 1 convolution layer, you should report each one separately. 
 
 Weight histogram is a figure showing the distribution of weight values. Its x axis is the value of each weight, y axis is the count of that value in the layer. Since the weights are floating points, you need to partite the weight values into multiple intervals and get the numbers of weights which fall into each interval. The weight histograms of all layers of one pruning method can be plotted in one figure (one histogram for each layer).
 
@@ -139,7 +139,7 @@ This is an example of weight histograms for NN
 https://stackoverflow.com/questions/42315202/understanding-tensorboard-weight-histograms
 
 
-### 4. Quantization with AMP 
+### 4. Quantization with AMP (Optional)
 In this bonus section, you will use **mixed precision** (AMP) as a straightforward “quantization” approach and measure **training time** and **peak GPU memory** when pruning with **Rand**. This task is optional but highly recommended to understand how quantization can reduce resource usage.
 
 
@@ -179,5 +179,5 @@ In your write-up, present a table comparing memory usage and training time for e
 
 ### 5. Explain your results and **submit a short report.**
 1. Please describe the settings of your experiments. 
-2. **Please include the required results (described in Task 1, 2, 3, and 4).** 
+2. **Please include the required results (described in Task 1, 2, 3, if applicable 4).** 
 3. Please add captions to describe your figures and tables. It would be best to write brief discussions on your results, such as the patterns (what and why), conclusions, and any observations you want to discuss.  
