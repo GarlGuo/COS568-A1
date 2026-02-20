@@ -57,7 +57,7 @@ def eval(model, loss, dataloader, device, verbose):
         # cannot be deleted for correct timing!!!
         torch.cuda.synchronize()
         
-        inference_time += start_event.elapsed_time(end_event) / 1e3   # milliseconds
+        inference_time += start_event.elapsed_time(end_event) / 1e3  # convert milliseconds to seconds
         
         total += loss(output, target).item() * data.size(0)
         _, pred = output.topk(5, dim=1)

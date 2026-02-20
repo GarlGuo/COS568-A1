@@ -79,7 +79,7 @@ python main.py --model-class lottery --model resnet20 --dataset cifar10 --experi
 | 0.5|    |      |        |      |         |
 | 1|    |      |        |      |         |
 
-***Total inference time on testing dataset***
+***Total inference time on testing dataset (s)***
 
 |   Compression |   Rand |  Mag |  SNIP |  GraSP | SynFlow       |   
 |----------------|-------------|-------------|-------------|---------------|----------------|
